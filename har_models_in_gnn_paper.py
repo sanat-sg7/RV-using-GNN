@@ -573,549 +573,594 @@ for ticker in tqdm(tickers):
     test_df = main_df.iloc[split_index:]
 
     """# **Standard HAR**"""
-    X_train, y_train, X_test, y_test = data(['RVD','RVW','RVM'])
-    HAR = sm.Logit(y_train, X_train)
-    HAR_results = HAR.fit(method='bfgs', maxiter=100, disp=True)
-    y_pred = HAR_results.predict(X_test)
-    accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
-    HAR_scores['Accuracy']+=accuracy
-    HAR_scores['AUC']+=auc
-    HAR_scores['Sensitivity']+=sens
-    HAR_scores['Specificity']+=spec
-    HAR_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['RVD','RVW','RVM'])
+        HAR = sm.Logit(y_train, X_train)
+        HAR_results = HAR.fit(method='bfgs', maxiter=100, disp=True)
+        y_pred = HAR_results.predict(X_test)
+        accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
+        HAR_scores['Accuracy']+=accuracy
+        HAR_scores['AUC']+=auc
+        HAR_scores['Sensitivity']+=sens
+        HAR_scores['Specificity']+=spec
+        HAR_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in HAR model for ticker", ticker, ":", e)
 
     """# **logistic-HARJ**"""
-    X_train, y_train, X_test, y_test = data(['RVD','RVW','RVM','CJ'])
-    HARJ = sm.Logit(y_train, X_train)
-    HARJ_results = HARJ.fit(method='bfgs', maxiter=100, disp=True)
-    y_pred = HARJ_results.predict(X_test)
-    accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
-    HARJ_scores['Accuracy']+=accuracy
-    HARJ_scores['AUC']+=auc
-    HARJ_scores['Sensitivity']+=sens
-    HARJ_scores['Specificity']+=spec
-    HARJ_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['RVD','RVW','RVM','CJ'])
+        HARJ = sm.Logit(y_train, X_train)
+        HARJ_results = HARJ.fit(method='bfgs', maxiter=100, disp=True)
+        y_pred = HARJ_results.predict(X_test)
+        accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
+        HARJ_scores['Accuracy']+=accuracy
+        HARJ_scores['AUC']+=auc
+        HARJ_scores['Sensitivity']+=sens
+        HARJ_scores['Specificity']+=spec
+        HARJ_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in HARJ model for ticker", ticker, ":", e)
 
     """# **logistic-HARCJ**"""
-    X_train, y_train, X_test, y_test = data(['CSP','CSPw','CSPm','CJ','CJw','CJm'])
-    HARCJ = sm.Logit(y_train, X_train)
-    HARCJ_results = HARCJ.fit(method='bfgs', maxiter=100, disp=True)
-    y_pred = HARCJ_results.predict(X_test)
-    accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
-    HARCJ_scores['Accuracy']+=accuracy
-    HARCJ_scores['AUC']+=auc
-    HARCJ_scores['Sensitivity']+=sens
-    HARCJ_scores['Specificity']+=spec
-    HARCJ_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['CSP','CSPw','CSPm','CJ','CJw','CJm'])
+        HARCJ = sm.Logit(y_train, X_train)
+        HARCJ_results = HARCJ.fit(method='bfgs', maxiter=100, disp=True)
+        y_pred = HARCJ_results.predict(X_test)
+        accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
+        HARCJ_scores['Accuracy']+=accuracy
+        HARCJ_scores['AUC']+=auc
+        HARCJ_scores['Sensitivity']+=sens
+        HARCJ_scores['Specificity']+=spec
+        HARCJ_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in HARCJ model for ticker", ticker, ":", e)
 
     """# **logistic-HARRSI**"""
-    X_train, y_train, X_test, y_test = data(['RS_plus','RS_minus','RVW','RVM'])
-    HARRSI = sm.Logit(
-        y_train, X_train
-    )
-    HARRSI_results = HARRSI.fit(method='bfgs', maxiter=100, disp=True)
-    y_pred = HARRSI_results.predict(X_test)
-    accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
-    HARRSI_scores['Accuracy']+=accuracy
-    HARRSI_scores['AUC']+=auc
-    HARRSI_scores['Sensitivity']+=sens
-    HARRSI_scores['Specificity']+=spec
-    HARRSI_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['RS_plus','RS_minus','RVW','RVM'])
+        HARRSI = sm.Logit(
+            y_train, X_train
+        )
+        HARRSI_results = HARRSI.fit(method='bfgs', maxiter=100, disp=True)
+        y_pred = HARRSI_results.predict(X_test)
+        accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
+        HARRSI_scores['Accuracy']+=accuracy
+        HARRSI_scores['AUC']+=auc
+        HARRSI_scores['Sensitivity']+=sens
+        HARRSI_scores['Specificity']+=spec
+        HARRSI_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in HARRSI model for ticker", ticker, ":", e)
 
     """# **logistic-HARRSII**"""
-    X_train, y_train, X_test, y_test = data(['RS_plus','RS_minus','RV_neg_indicator','RVW','RVM'])
-    HARRSII = sm.Logit(
-        y_train, X_train
-    )
-    HARRSII_results = HARRSII.fit(method='bfgs', maxiter=100, disp=True)
-    y_pred = HARRSII_results.predict(X_test)
-    accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
-    HARRSII_scores['Accuracy']+=accuracy
-    HARRSII_scores['AUC']+=auc
-    HARRSII_scores['Sensitivity']+=sens
-    HARRSII_scores['Specificity']+=spec
-    HARRSII_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['RS_plus','RS_minus','RV_neg_indicator','RVW','RVM'])
+        HARRSII = sm.Logit(
+            y_train, X_train
+        )
+        HARRSII_results = HARRSII.fit(method='bfgs', maxiter=100, disp=True)
+        y_pred = HARRSII_results.predict(X_test)
+        accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
+        HARRSII_scores['Accuracy']+=accuracy
+        HARRSII_scores['AUC']+=auc
+        HARRSII_scores['Sensitivity']+=sens
+        HARRSII_scores['Specificity']+=spec
+        HARRSII_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in HARRSII model for ticker", ticker, ":", e)
 
     """# **logistic-HARRSJI**"""
-    X_train, y_train, X_test, y_test = data(['SJ','BPV','RVW','RVM'])
-    HARRSJI = sm.Logit(
-        y_train, X_train
-    )
-    HARRSJI_results = HARRSJI.fit(method='bfgs', maxiter=100, disp=True)
-    y_pred = HARRSJI_results.predict(X_test)
-    accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
-    HARRSJI_scores['Accuracy']+=accuracy
-    HARRSJI_scores['AUC']+=auc
-    HARRSJI_scores['Sensitivity']+=sens
-    HARRSJI_scores['Specificity']+=spec
-    HARRSJI_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['SJ','BPV','RVW','RVM'])
+        HARRSJI = sm.Logit(
+            y_train, X_train
+        )
+        HARRSJI_results = HARRSJI.fit(method='bfgs', maxiter=100, disp=True)
+        y_pred = HARRSJI_results.predict(X_test)
+        accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
+        HARRSJI_scores['Accuracy']+=accuracy
+        HARRSJI_scores['AUC']+=auc
+        HARRSJI_scores['Sensitivity']+=sens
+        HARRSJI_scores['Specificity']+=spec
+        HARRSJI_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in HARRSJI model for ticker", ticker, ":", e)
 
     """# **logistic-HARRSJII**"""
-    X_train, y_train, X_test, y_test = data(['SJ_plus','SJ_minus','BPV','RVW','RVM'])
-    HARRSJII = sm.Logit(
-        y_train, X_train
-    )
-    HARRSJII_results = HARRSJII.fit(method='bfgs', maxiter=100, disp=True)
-    y_pred = HARRSJII_results.predict(X_test)
-    accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
-    HARRSJII_scores['Accuracy']+=accuracy
-    HARRSJII_scores['AUC']+=auc
-    HARRSJII_scores['Sensitivity']+=sens
-    HARRSJII_scores['Specificity']+=spec
-    HARRSJII_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['SJ_plus','SJ_minus','BPV','RVW','RVM'])
+        HARRSJII = sm.Logit(
+            y_train, X_train
+        )
+        HARRSJII_results = HARRSJII.fit(method='bfgs', maxiter=100, disp=True)
+        y_pred = HARRSJII_results.predict(X_test)
+        accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
+        HARRSJII_scores['Accuracy']+=accuracy
+        HARRSJII_scores['AUC']+=auc
+        HARRSJII_scores['Sensitivity']+=sens
+        HARRSJII_scores['Specificity']+=spec
+        HARRSJII_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in HARRSJII model for ticker", ticker, ":", e)
 
     """# **logistic-HAR-KS**"""
-    X_train, y_train, X_test, y_test = data(['RVD','BPV','Jump_ABD','CSP_ABD','Jump_BNS','CSP_BNS','Jump_JO','CSP_JO','RS_plus','RS_minus','L_daily','RV_neg_indicator','SJ', 'SJ_plus', 'SJ_minus', 'TQ'])
-    HAR_KS = sm.Logit(
-        y_train, X_train
-    )
-    HAR_KS_results = HAR_KS.fit(method='bfgs',maxiter=100, disp=True)
-    y_pred = HAR_KS_results.predict(X_test)
-    accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
-    HAR_KS_scores['Accuracy']+=accuracy
-    HAR_KS_scores['AUC']+=auc
-    HAR_KS_scores['Sensitivity']+=sens
-    HAR_KS_scores['Specificity']+=spec
-    HAR_KS_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['RVD','BPV','Jump_ABD','CSP_ABD','Jump_BNS','CSP_BNS','Jump_JO','CSP_JO','RS_plus','RS_minus','L_daily','RV_neg_indicator','SJ', 'SJ_plus', 'SJ_minus', 'TQ'])
+        HAR_KS = sm.Logit(
+            y_train, X_train
+        )
+        HAR_KS_results = HAR_KS.fit(method='bfgs',maxiter=100, disp=True)
+        y_pred = HAR_KS_results.predict(X_test)
+        accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
+        HAR_KS_scores['Accuracy']+=accuracy
+        HAR_KS_scores['AUC']+=auc
+        HAR_KS_scores['Sensitivity']+=sens
+        HAR_KS_scores['Specificity']+=spec
+        HAR_KS_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in HAR-KS model for ticker", ticker, ":", e)
 
     """# **logistic-HAR-myProposal**"""
-    X_train, y_train, X_test, y_test = data(['CSP','CSPw','CJ','CJw','SJ','BPV','RQ'])
-    HAR_KS = sm.Logit(
-        y_train, X_train
-    )
-    HAR_KS_results = HAR_KS.fit(method='bfgs',maxiter=100, disp=True)
-    y_pred = HAR_KS_results.predict(X_test)
-    accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
-    HAR_myProposal_scores['Accuracy']+=accuracy
-    HAR_myProposal_scores['AUC']+=auc
-    HAR_myProposal_scores['Sensitivity']+=sens
-    HAR_myProposal_scores['Specificity']+=spec
-    HAR_myProposal_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['CSP','CSPw','CJ','CJw','SJ','BPV','RQ'])
+        HAR_KS = sm.Logit(
+            y_train, X_train
+        )
+        HAR_KS_results = HAR_KS.fit(method='bfgs',maxiter=100, disp=True)
+        y_pred = HAR_KS_results.predict(X_test)
+        accuracy, auc, sens, spec, yi = perf_eval(y_pred, y_test)
+        HAR_myProposal_scores['Accuracy']+=accuracy
+        HAR_myProposal_scores['AUC']+=auc
+        HAR_myProposal_scores['Sensitivity']+=sens
+        HAR_myProposal_scores['Specificity']+=spec
+        HAR_myProposal_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in HAR-myProposal model for ticker", ticker, ":", e)
 
     """# **RF-HAR-KS**"""
-    X_train, y_train, X_test, y_test = data(['RVD','BPV','Jump_ABD','CSP_ABD','Jump_BNS','CSP_BNS','Jump_JO','CSP_JO','RS_plus','RS_minus','L_daily','RV_neg_indicator','SJ', 'SJ_plus', 'SJ_minus', 'TQ'])
-    p = X_train.shape[1]
-    ntry = max(1, int(round(p / 3)))
-    rf = RandomForestClassifier(
-        n_estimators=500,
-        max_features=ntry,
-        random_state=42,
-        n_jobs=-1,
-        class_weight=None  # or 'balanced' if classes are imbalanced
-    )
-    rf.fit(X_train, y_train)
-    y_prob = rf.predict_proba(X_test)[:, 1]   # probability of class 1
-    y_pred = (y_prob >= 0.5).astype(int)
-    acc = round(accuracy_score(y_test, y_pred),4)
-    auc = round(roc_auc_score(y_test, y_prob),4)
-    cm = confusion_matrix(y_test, y_pred)
-    tp = cm[0][0]
-    fp = cm[0][1]
-    fn = cm[1][0]
-    tn = cm[1][1]
-    sens = round(tp/(tp+fn),4)
-    spec = round(tn/(fp+tn),4)
-    yi = round(sens + spec -1,4)
-    RF_HAR_KS_scores['Accuracy']+=acc
-    RF_HAR_KS_scores['AUC']+=auc
-    RF_HAR_KS_scores['Sensitivity']+=sens
-    RF_HAR_KS_scores['Specificity']+=spec
-    RF_HAR_KS_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['RVD','BPV','Jump_ABD','CSP_ABD','Jump_BNS','CSP_BNS','Jump_JO','CSP_JO','RS_plus','RS_minus','L_daily','RV_neg_indicator','SJ', 'SJ_plus', 'SJ_minus', 'TQ'])
+        p = X_train.shape[1]
+        ntry = max(1, int(round(p / 3)))
+        rf = RandomForestClassifier(
+            n_estimators=500,
+            max_features=ntry,
+            random_state=42,
+            n_jobs=-1,
+            class_weight=None  # or 'balanced' if classes are imbalanced
+        )
+        rf.fit(X_train, y_train)
+        y_prob = rf.predict_proba(X_test)[:, 1]   # probability of class 1
+        y_pred = (y_prob >= 0.5).astype(int)
+        acc = round(accuracy_score(y_test, y_pred),4)
+        auc = round(roc_auc_score(y_test, y_prob),4)
+        cm = confusion_matrix(y_test, y_pred)
+        tn, fp, fn, tp = cm.ravel()
+        sens = round(tp/(tp+fn),4)
+        spec = round(tn/(fp+tn),4)
+        yi = round(sens + spec -1,4)
+        RF_HAR_KS_scores['Accuracy']+=acc
+        RF_HAR_KS_scores['AUC']+=auc
+        RF_HAR_KS_scores['Sensitivity']+=sens
+        RF_HAR_KS_scores['Specificity']+=spec
+        RF_HAR_KS_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in RF-HAR-KS model for ticker", ticker, ":", e)
 
     """# **RF-HAR-MyProposal**"""
-    X_train, y_train, X_test, y_test = data(['CSP','CSPw','CJ','CJw','SJ','BPV','RQ'])
-    p = X_train.shape[1]
-    ntry = max(1, int(round(p / 3)))
-    rf = RandomForestClassifier(
-        n_estimators=500,
-        max_features=ntry,
-        random_state=42,
-        n_jobs=-1,
-        class_weight=None  # or 'balanced' if classes are imbalanced
-    )
-    rf.fit(X_train, y_train)
-    y_prob = rf.predict_proba(X_test)[:, 1]   # probability of class 1
-    y_pred = (y_prob >= 0.5).astype(int)
-    acc = round(accuracy_score(y_test, y_pred),4)
-    auc = round(roc_auc_score(y_test, y_prob),4)
-    cm = confusion_matrix(y_test, y_pred)
-    tp = cm[0][0]
-    fp = cm[0][1]
-    fn = cm[1][0]
-    tn = cm[1][1]
-    sens = round(tp/(tp+fn),4)
-    spec = round(tn/(fp+tn),4)
-    yi = round(sens + spec -1,4)
-    RF_HAR_myProposal_scores['Accuracy']+=acc
-    RF_HAR_myProposal_scores['AUC']+=auc
-    RF_HAR_myProposal_scores['Sensitivity']+=sens
-    RF_HAR_myProposal_scores['Specificity']+=spec
-    RF_HAR_myProposal_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['CSP','CSPw','CJ','CJw','SJ','BPV','RQ'])
+        p = X_train.shape[1]
+        ntry = max(1, int(round(p / 3)))
+        rf = RandomForestClassifier(
+            n_estimators=500,
+            max_features=ntry,
+            random_state=42,
+            n_jobs=-1,
+            class_weight=None  # or 'balanced' if classes are imbalanced
+        )
+        rf.fit(X_train, y_train)
+        y_prob = rf.predict_proba(X_test)[:, 1]   # probability of class 1
+        y_pred = (y_prob >= 0.5).astype(int)
+        acc = round(accuracy_score(y_test, y_pred),4)
+        auc = round(roc_auc_score(y_test, y_prob),4)
+        cm = confusion_matrix(y_test, y_pred)
+        tn, fp, fn, tp = cm.ravel()
+        sens = round(tp/(tp+fn),4)
+        spec = round(tn/(fp+tn),4)
+        yi = round(sens + spec -1,4)
+        RF_HAR_myProposal_scores['Accuracy']+=acc
+        RF_HAR_myProposal_scores['AUC']+=auc
+        RF_HAR_myProposal_scores['Sensitivity']+=sens
+        RF_HAR_myProposal_scores['Specificity']+=spec
+        RF_HAR_myProposal_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in RF-HAR-MyProposal model for ticker", ticker, ":", e)
 
     """# **LightGBM-HAR-KS**"""
-    X_train, y_train, X_test, y_test = data(['RVD','BPV','Jump_ABD','CSP_ABD','Jump_BNS','CSP_BNS','Jump_JO','CSP_JO','RS_plus','RS_minus','L_daily','RV_neg_indicator','SJ', 'SJ_plus', 'SJ_minus', 'TQ'])
-    # --- 3. LightGBM dataset objects ---
-    dtrain = lgb.Dataset(X_train, label=y_train, free_raw_data=False)
-    dvalid = lgb.Dataset(X_test, label=y_test, reference=dtrain, free_raw_data=False)
-    # --- 4. Parameters (aligned with Appendix A recommendations / common defaults) ---
-    params = {
-        'objective': 'binary',           # binary classification (direction)
-        'boosting_type': 'gbdt',         # standard LightGBM GBDT (leaf-wise)
-        'metric': 'auc',                 # optimize AUC (paper uses AUC as key metric)
-        'num_leaves': 31,                # complexity of each tree (paper suggests tuning; 31 is common)
-        'learning_rate': 0.05,           # shrinkage (Appendix suggests small lr for stability)
-        'feature_fraction': 0.8,         # EFB/feature subsampling
-        'bagging_fraction': 0.8,         # row subsampling (GOSS & bagging interplay)
-        'bagging_freq': 1,               # perform bagging every iteration
-        'lambda_l2': 0.1,                # L2 regularization on leaf weights (lambda in appendix)
-        'min_data_in_leaf': 20,          # min samples per leaf (stability)
-        'max_depth': -1,                 # no explicit depth limit (leaf-wise controls shape)
-        'verbosity': -1,
-        'seed': 42,
-        'nthread': -1
-    }
-    # training rounds and early stopping
-    num_boost_round = 1000
-    callbacks = [
-        early_stopping(stopping_rounds=50),
-        log_evaluation(period=25)
-    ]
-    bst = lgb.train(
-        params=params,
-        train_set=dtrain,
-        num_boost_round=num_boost_round,
-        valid_sets=[dvalid],
-        valid_names=['valid'],
-        callbacks=callbacks
-    )
-    # --- 6. Predict & evaluate ---
-    y_prob = bst.predict(X_test, num_iteration=bst.best_iteration)  # probabilities in [0,1]
-    y_pred = (y_prob >= 0.5).astype(int)
-    acc = round(accuracy_score(y_test, y_pred),4)
-    auc = round(roc_auc_score(y_test, y_prob),4)
-    cm = confusion_matrix(y_test, y_pred)
-    tn, fp, fn, tp = cm.ravel()
-    sens = round(tp/(tp+fn),4)
-    spec = round(tn/(fp+tn),4)
-    yi = round(sens + spec -1,4)
-    LGBM_HAR_KS_scores['Accuracy']+=acc
-    LGBM_HAR_KS_scores['AUC']+=auc
-    LGBM_HAR_KS_scores['Sensitivity']+=sens
-    LGBM_HAR_KS_scores['Specificity']+=spec
-    LGBM_HAR_KS_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['RVD','BPV','Jump_ABD','CSP_ABD','Jump_BNS','CSP_BNS','Jump_JO','CSP_JO','RS_plus','RS_minus','L_daily','RV_neg_indicator','SJ', 'SJ_plus', 'SJ_minus', 'TQ'])
+        # --- 3. LightGBM dataset objects ---
+        dtrain = lgb.Dataset(X_train, label=y_train, free_raw_data=False)
+        dvalid = lgb.Dataset(X_test, label=y_test, reference=dtrain, free_raw_data=False)
+        # --- 4. Parameters (aligned with Appendix A recommendations / common defaults) ---
+        params = {
+            'objective': 'binary',           # binary classification (direction)
+            'boosting_type': 'gbdt',         # standard LightGBM GBDT (leaf-wise)
+            'metric': 'auc',                 # optimize AUC (paper uses AUC as key metric)
+            'num_leaves': 31,                # complexity of each tree (paper suggests tuning; 31 is common)
+            'learning_rate': 0.05,           # shrinkage (Appendix suggests small lr for stability)
+            'feature_fraction': 0.8,         # EFB/feature subsampling
+            'bagging_fraction': 0.8,         # row subsampling (GOSS & bagging interplay)
+            'bagging_freq': 1,               # perform bagging every iteration
+            'lambda_l2': 0.1,                # L2 regularization on leaf weights (lambda in appendix)
+            'min_data_in_leaf': 20,          # min samples per leaf (stability)
+            'max_depth': -1,                 # no explicit depth limit (leaf-wise controls shape)
+            'verbosity': -1,
+            'seed': 42,
+            'nthread': -1
+        }
+        # training rounds and early stopping
+        num_boost_round = 1000
+        callbacks = [
+            early_stopping(stopping_rounds=50),
+            log_evaluation(period=25)
+        ]
+        bst = lgb.train(
+            params=params,
+            train_set=dtrain,
+            num_boost_round=num_boost_round,
+            valid_sets=[dvalid],
+            valid_names=['valid'],
+            callbacks=callbacks
+        )
+        # --- 6. Predict & evaluate ---
+        y_prob = bst.predict(X_test, num_iteration=bst.best_iteration)  # probabilities in [0,1]
+        y_pred = (y_prob >= 0.5).astype(int)
+        acc = round(accuracy_score(y_test, y_pred),4)
+        auc = round(roc_auc_score(y_test, y_prob),4)
+        cm = confusion_matrix(y_test, y_pred)
+        tn, fp, fn, tp = cm.ravel()
+        sens = round(tp/(tp+fn),4)
+        spec = round(tn/(fp+tn),4)
+        yi = round(sens + spec -1,4)
+        LGBM_HAR_KS_scores['Accuracy']+=acc
+        LGBM_HAR_KS_scores['AUC']+=auc
+        LGBM_HAR_KS_scores['Sensitivity']+=sens
+        LGBM_HAR_KS_scores['Specificity']+=spec
+        LGBM_HAR_KS_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in LGBM-HAR-KS model for ticker", ticker, ":", e)
 
     """# **LightGBM-HAR-MyProposal**"""
-    X_train, y_train, X_test, y_test = data(['CSP','CSPw','CJ','CJw','SJ','BPV','RQ'])
-    # --- 3. LightGBM dataset objects ---
-    dtrain = lgb.Dataset(X_train, label=y_train, free_raw_data=False)
-    dvalid = lgb.Dataset(X_test, label=y_test, reference=dtrain, free_raw_data=False)
-    # --- 4. Parameters (aligned with Appendix A recommendations / common defaults) ---
-    params = {
-        'objective': 'binary',           # binary classification (direction)
-        'boosting_type': 'gbdt',         # standard LightGBM GBDT (leaf-wise)
-        'metric': 'auc',                 # optimize AUC (paper uses AUC as key metric)
-        'num_leaves': 31,                # complexity of each tree (paper suggests tuning; 31 is common)
-        'learning_rate': 0.05,           # shrinkage (Appendix suggests small lr for stability)
-        'feature_fraction': 0.8,         # EFB/feature subsampling
-        'bagging_fraction': 0.8,         # row subsampling (GOSS & bagging interplay)
-        'bagging_freq': 1,               # perform bagging every iteration
-        'lambda_l2': 0.1,                # L2 regularization on leaf weights (lambda in appendix)
-        'min_data_in_leaf': 20,          # min samples per leaf (stability)
-        'max_depth': -1,                 # no explicit depth limit (leaf-wise controls shape)
-        'verbosity': -1,
-        'seed': 42,
-        'nthread': -1
-    }
-    # training rounds and early stopping
-    num_boost_round = 1000
-    callbacks = [
-        early_stopping(stopping_rounds=50),
-        log_evaluation(period=25)
-    ]
-    bst = lgb.train(
-        params=params,
-        train_set=dtrain,
-        num_boost_round=num_boost_round,
-        valid_sets=[dvalid],
-        valid_names=['valid'],
-        callbacks=callbacks
-    )
-    # --- 6. Predict & evaluate ---
-    y_prob = bst.predict(X_test, num_iteration=bst.best_iteration)  # probabilities in [0,1]
-    y_pred = (y_prob >= 0.5).astype(int)
-    acc = round(accuracy_score(y_test, y_pred),4)
-    auc = round(roc_auc_score(y_test, y_prob),4)
-    cm = confusion_matrix(y_test, y_pred)
-    tn, fp, fn, tp = cm.ravel()
-    sens = round(tp/(tp+fn),4)
-    spec = round(tn/(fp+tn),4)
-    yi = round(sens + spec -1,4)
-    LGBM_HAR_myProposal_scores['Accuracy']+=acc
-    LGBM_HAR_myProposal_scores['AUC']+=auc
-    LGBM_HAR_myProposal_scores['Sensitivity']+=sens
-    LGBM_HAR_myProposal_scores['Specificity']+=spec
-    LGBM_HAR_myProposal_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['CSP','CSPw','CJ','CJw','SJ','BPV','RQ'])
+        # --- 3. LightGBM dataset objects ---
+        dtrain = lgb.Dataset(X_train, label=y_train, free_raw_data=False)
+        dvalid = lgb.Dataset(X_test, label=y_test, reference=dtrain, free_raw_data=False)
+        # --- 4. Parameters (aligned with Appendix A recommendations / common defaults) ---
+        params = {
+            'objective': 'binary',           # binary classification (direction)
+            'boosting_type': 'gbdt',         # standard LightGBM GBDT (leaf-wise)
+            'metric': 'auc',                 # optimize AUC (paper uses AUC as key metric)
+            'num_leaves': 31,                # complexity of each tree (paper suggests tuning; 31 is common)
+            'learning_rate': 0.05,           # shrinkage (Appendix suggests small lr for stability)
+            'feature_fraction': 0.8,         # EFB/feature subsampling
+            'bagging_fraction': 0.8,         # row subsampling (GOSS & bagging interplay)
+            'bagging_freq': 1,               # perform bagging every iteration
+            'lambda_l2': 0.1,                # L2 regularization on leaf weights (lambda in appendix)
+            'min_data_in_leaf': 20,          # min samples per leaf (stability)
+            'max_depth': -1,                 # no explicit depth limit (leaf-wise controls shape)
+            'verbosity': -1,
+            'seed': 42,
+            'nthread': -1
+        }
+        # training rounds and early stopping
+        num_boost_round = 1000
+        callbacks = [
+            early_stopping(stopping_rounds=50),
+            log_evaluation(period=25)
+        ]
+        bst = lgb.train(
+            params=params,
+            train_set=dtrain,
+            num_boost_round=num_boost_round,
+            valid_sets=[dvalid],
+            valid_names=['valid'],
+            callbacks=callbacks
+        )
+        # --- 6. Predict & evaluate ---
+        y_prob = bst.predict(X_test, num_iteration=bst.best_iteration)  # probabilities in [0,1]
+        y_pred = (y_prob >= 0.5).astype(int)
+        acc = round(accuracy_score(y_test, y_pred),4)
+        auc = round(roc_auc_score(y_test, y_prob),4)
+        cm = confusion_matrix(y_test, y_pred)
+        tn, fp, fn, tp = cm.ravel()
+        sens = round(tp/(tp+fn),4)
+        spec = round(tn/(fp+tn),4)
+        yi = round(sens + spec -1,4)
+        LGBM_HAR_myProposal_scores['Accuracy']+=acc
+        LGBM_HAR_myProposal_scores['AUC']+=auc
+        LGBM_HAR_myProposal_scores['Sensitivity']+=sens
+        LGBM_HAR_myProposal_scores['Specificity']+=spec
+        LGBM_HAR_myProposal_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in LGBM-HAR-MyProposal model for ticker", ticker, ":", e)
 
     """# **XGB-HAR-KS**"""
-    X_train, y_train, X_test, y_test = data(['RVD','BPV','Jump_ABD','CSP_ABD','Jump_BNS','CSP_BNS','Jump_JO','CSP_JO','RS_plus','RS_minus','L_daily','RV_neg_indicator','SJ', 'SJ_plus', 'SJ_minus', 'TQ'])
-    split_index_val = int(0.4 * len(X_test))
-    X_val = X_test.iloc[:split_index_val]
-    X_test = X_test.iloc[split_index_val:]
-    y_val = y_test.iloc[:split_index_val]
-    y_test = y_test.iloc[split_index_val:]
-    # --- 1. Prepare DMatrix ---
-    dtrain = xgb.DMatrix(X_train, label=y_train)
-    dval = xgb.DMatrix(X_val, label=y_val)
-    dtest = xgb.DMatrix(X_test, label=y_test)
-    # --- 2. Parameters (aligned with Appendix B and paper) ---
-    params = {
-        'objective': 'binary:logistic',
-        'eval_metric': 'auc',
-        'eta': 0.07,                 # learning rate
-        'max_depth': 4,              # tree depth
-        'subsample': 0.8,
-        'colsample_bytree': 0.8,
-        'lambda': 0.5,               # L2 regularization term
-        'gamma': 0.05,                # leaf penalty term
-        'min_child_weight': 1,
-        'scale_pos_weight': 1,       # assume balanced data
-        'verbosity': 1,
-        'seed': 42
-    }
-    # --- 3. Train model with validation ---
-    evals = [(dtrain, 'train'), (dval, 'val')]
-    num_boost_round = 1000
-    bst = xgb.train(
-        params,
-        dtrain,
-        num_boost_round=num_boost_round,
-        evals=evals,
-        early_stopping_rounds=50,
-        verbose_eval=50
-    )
-    # --- 4. Evaluate on test set ---
-    y_pred_prob = bst.predict(dtest)
-    y_pred = (y_pred_prob > 0.5).astype(int)
-    acc = round(accuracy_score(y_test, y_pred),4)
-    auc = round(roc_auc_score(y_test, y_pred),4)
-    cm = confusion_matrix(y_test, y_pred)
-    tn, fp, fn, tp = cm.ravel()
-    sens = round(tp/(tp+fn),4)
-    spec = round(tn/(fp+tn),4)
-    yi = round(sens + spec -1,4)
-    XGB_HAR_KS_scores['Accuracy']+=acc
-    XGB_HAR_KS_scores['AUC']+=auc
-    XGB_HAR_KS_scores['Sensitivity']+=sens
-    XGB_HAR_KS_scores['Specificity']+=spec
-    XGB_HAR_KS_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['RVD','BPV','Jump_ABD','CSP_ABD','Jump_BNS','CSP_BNS','Jump_JO','CSP_JO','RS_plus','RS_minus','L_daily','RV_neg_indicator','SJ', 'SJ_plus', 'SJ_minus', 'TQ'])
+        split_index_val = int(0.4 * len(X_test))
+        X_val = X_test.iloc[:split_index_val]
+        X_test = X_test.iloc[split_index_val:]
+        y_val = y_test.iloc[:split_index_val]
+        y_test = y_test.iloc[split_index_val:]
+        # --- 1. Prepare DMatrix ---
+        dtrain = xgb.DMatrix(X_train, label=y_train)
+        dval = xgb.DMatrix(X_val, label=y_val)
+        dtest = xgb.DMatrix(X_test, label=y_test)
+        # --- 2. Parameters (aligned with Appendix B and paper) ---
+        params = {
+            'objective': 'binary:logistic',
+            'eval_metric': 'auc',
+            'eta': 0.07,                 # learning rate
+            'max_depth': 4,              # tree depth
+            'subsample': 0.8,
+            'colsample_bytree': 0.8,
+            'lambda': 0.5,               # L2 regularization term
+            'gamma': 0.05,                # leaf penalty term
+            'min_child_weight': 1,
+            'scale_pos_weight': 1,       # assume balanced data
+            'verbosity': 1,
+            'seed': 42
+        }
+        # --- 3. Train model with validation ---
+        evals = [(dtrain, 'train'), (dval, 'val')]
+        num_boost_round = 1000
+        bst = xgb.train(
+            params,
+            dtrain,
+            num_boost_round=num_boost_round,
+            evals=evals,
+            early_stopping_rounds=50,
+            verbose_eval=50
+        )
+        # --- 4. Evaluate on test set ---
+        y_pred_prob = bst.predict(dtest)
+        y_pred = (y_pred_prob > 0.5).astype(int)
+        acc = round(accuracy_score(y_test, y_pred),4)
+        auc = round(roc_auc_score(y_test, y_pred),4)
+        cm = confusion_matrix(y_test, y_pred)
+        tn, fp, fn, tp = cm.ravel()
+        sens = round(tp/(tp+fn),4)
+        spec = round(tn/(fp+tn),4)
+        yi = round(sens + spec -1,4)
+        XGB_HAR_KS_scores['Accuracy']+=acc
+        XGB_HAR_KS_scores['AUC']+=auc
+        XGB_HAR_KS_scores['Sensitivity']+=sens
+        XGB_HAR_KS_scores['Specificity']+=spec
+        XGB_HAR_KS_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in XGB-HAR-KS model for ticker", ticker, ":", e)
 
     """# **XGB-HAR-MyProposal**"""
-    X_train, y_train, X_test, y_test = data(['CSP','CSPw','CJ','CJw','SJ','BPV','RQ'])
-    split_index_val = int(0.4 * len(X_test))
-    X_val = X_test.iloc[:split_index_val]
-    X_test = X_test.iloc[split_index_val:]
-    y_val = y_test.iloc[:split_index_val]
-    y_test = y_test.iloc[split_index_val:]
-    # --- 1. Prepare DMatrix ---
-    dtrain = xgb.DMatrix(X_train, label=y_train)
-    dval = xgb.DMatrix(X_val, label=y_val)
-    dtest = xgb.DMatrix(X_test, label=y_test)
-    # --- 2. Parameters (aligned with Appendix B and paper) ---
-    params = {
-        'objective': 'binary:logistic',
-        'eval_metric': 'auc',
-        'eta': 0.07,                 # learning rate
-        'max_depth': 4,              # tree depth
-        'subsample': 0.8,
-        'colsample_bytree': 0.8,
-        'lambda': 0.5,               # L2 regularization term
-        'gamma': 0.05,                # leaf penalty term
-        'min_child_weight': 1,
-        'scale_pos_weight': 1,       # assume balanced data
-        'verbosity': 1,
-        'seed': 42
-    }
-    # --- 3. Train model with validation ---
-    evals = [(dtrain, 'train'), (dval, 'val')]
-    num_boost_round = 1000
-    bst = xgb.train(
-        params,
-        dtrain,
-        num_boost_round=num_boost_round,
-        evals=evals,
-        early_stopping_rounds=50,
-        verbose_eval=50
-    )
-    # --- 4. Evaluate on test set ---
-    y_pred_prob = bst.predict(dtest)
-    y_pred = (y_pred_prob > 0.5).astype(int)
-    acc = round(accuracy_score(y_test, y_pred),4)
-    auc = round(roc_auc_score(y_test, y_pred),4)
-    cm = confusion_matrix(y_test, y_pred)
-    tn, fp, fn, tp = cm.ravel()
-    sens = round(tp/(tp+fn),4)
-    spec = round(tn/(fp+tn),4)
-    yi = round(sens + spec -1,4)
-    XGB_HAR_myProposal_scores['Accuracy']+=acc
-    XGB_HAR_myProposal_scores['AUC']+=auc
-    XGB_HAR_myProposal_scores['Sensitivity']+=sens
-    XGB_HAR_myProposal_scores['Specificity']+=spec
-    XGB_HAR_myProposal_scores['Youden_Index']+=yi
+    try:
+        X_train, y_train, X_test, y_test = data(['CSP','CSPw','CJ','CJw','SJ','BPV','RQ'])
+        split_index_val = int(0.4 * len(X_test))
+        X_val = X_test.iloc[:split_index_val]
+        X_test = X_test.iloc[split_index_val:]
+        y_val = y_test.iloc[:split_index_val]
+        y_test = y_test.iloc[split_index_val:]
+        # --- 1. Prepare DMatrix ---
+        dtrain = xgb.DMatrix(X_train, label=y_train)
+        dval = xgb.DMatrix(X_val, label=y_val)
+        dtest = xgb.DMatrix(X_test, label=y_test)
+        # --- 2. Parameters (aligned with Appendix B and paper) ---
+        params = {
+            'objective': 'binary:logistic',
+            'eval_metric': 'auc',
+            'eta': 0.07,                 # learning rate
+            'max_depth': 4,              # tree depth
+            'subsample': 0.8,
+            'colsample_bytree': 0.8,
+            'lambda': 0.5,               # L2 regularization term
+            'gamma': 0.05,                # leaf penalty term
+            'min_child_weight': 1,
+            'scale_pos_weight': 1,       # assume balanced data
+            'verbosity': 1,
+            'seed': 42
+        }
+        # --- 3. Train model with validation ---
+        evals = [(dtrain, 'train'), (dval, 'val')]
+        num_boost_round = 1000
+        bst = xgb.train(
+            params,
+            dtrain,
+            num_boost_round=num_boost_round,
+            evals=evals,
+            early_stopping_rounds=50,
+            verbose_eval=50
+        )
+        # --- 4. Evaluate on test set ---
+        y_pred_prob = bst.predict(dtest)
+        y_pred = (y_pred_prob > 0.5).astype(int)
+        acc = round(accuracy_score(y_test, y_pred),4)
+        auc = round(roc_auc_score(y_test, y_pred),4)
+        cm = confusion_matrix(y_test, y_pred)
+        tn, fp, fn, tp = cm.ravel()
+        sens = round(tp/(tp+fn),4)
+        spec = round(tn/(fp+tn),4)
+        yi = round(sens + spec -1,4)
+        XGB_HAR_myProposal_scores['Accuracy']+=acc
+        XGB_HAR_myProposal_scores['AUC']+=auc
+        XGB_HAR_myProposal_scores['Sensitivity']+=sens
+        XGB_HAR_myProposal_scores['Specificity']+=spec
+        XGB_HAR_myProposal_scores['Youden_Index']+=yi
+    except Exception as e:
+        print("Error in XGB-HAR-MyProposal model for ticker", ticker, ":", e)
 
     """# **FFN-HAR-KS**"""
-    X_train, y_train, X_test, y_test = data(['RVD','BPV','Jump_ABD','CSP_ABD','Jump_BNS','CSP_BNS','Jump_JO','CSP_JO','RS_plus','RS_minus','L_daily','RV_neg_indicator','SJ', 'SJ_plus', 'SJ_minus', 'TQ'])
-    # Convert pandas -> numpy
-    X_train_np = X_train.values.astype(np.float32)
-    X_test_np  = X_test.values.astype(np.float32)
-    y_train_np = y_train.values.astype(np.float32).reshape(-1, 1)
-    y_test_np  = y_test.values.astype(np.float32).reshape(-1, 1)
-    # Standardize features (fit on train only)
-    scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train_np)
-    X_test_scaled = scaler.transform(X_test_np)
-    # Save scaler for inference later
-    joblib.dump(scaler, "ffn_scaler.pkl")
-    # Create validation split from training set (last 20% of the training part)
-    val_frac = 0.2
-    n_train = X_train_scaled.shape[0]
-    n_val = int(math.ceil(n_train * val_frac))
-    n_train_sub = n_train - n_val
+    try:
+        X_train, y_train, X_test, y_test = data(['RVD','BPV','Jump_ABD','CSP_ABD','Jump_BNS','CSP_BNS','Jump_JO','CSP_JO','RS_plus','RS_minus','L_daily','RV_neg_indicator','SJ', 'SJ_plus', 'SJ_minus', 'TQ'])
+        # Convert pandas -> numpy
+        X_train_np = X_train.values.astype(np.float32)
+        X_test_np  = X_test.values.astype(np.float32)
+        y_train_np = y_train.values.astype(np.float32).reshape(-1, 1)
+        y_test_np  = y_test.values.astype(np.float32).reshape(-1, 1)
+        # Standardize features (fit on train only)
+        scaler = StandardScaler()
+        X_train_scaled = scaler.fit_transform(X_train_np)
+        X_test_scaled = scaler.transform(X_test_np)
+        # Save scaler for inference later
+        joblib.dump(scaler, "ffn_scaler.pkl")
+        # Create validation split from training set (last 20% of the training part)
+        val_frac = 0.2
+        n_train = X_train_scaled.shape[0]
+        n_val = int(math.ceil(n_train * val_frac))
+        n_train_sub = n_train - n_val
 
-    X_train_sub = X_train_scaled[:n_train_sub]
-    y_train_sub = y_train_np[:n_train_sub]
-    X_val = X_train_scaled[n_train_sub:]
-    y_val = y_train_np[n_train_sub:]
+        X_train_sub = X_train_scaled[:n_train_sub]
+        y_train_sub = y_train_np[:n_train_sub]
+        X_val = X_train_scaled[n_train_sub:]
+        y_val = y_train_np[n_train_sub:]
 
-    train_ds = to_tensor_dataset(X_train_sub, y_train_sub)
-    val_ds   = to_tensor_dataset(X_val, y_val)
-    test_ds  = to_tensor_dataset(X_test_scaled, y_test_np)
-    
-    # Hyperparameter grid from paper
-    batch_sizes = [8, 16]
-    dropouts = [0.3, 0.7]
-    l2_rate = 0.001   # weight decay
-    lr_initial = 1e-3 # we'll use ReduceLROnPlateau; starting LR chosen sensibly
-    min_lr = 1e-4
-    max_epochs = 3000
-    patience_es = 100     # early stopping patience (this is long; paper used early stopping)
-    patience_lr = 20      # patience for ReduceLROnPlateau
-    verbose = True
+        train_ds = to_tensor_dataset(X_train_sub, y_train_sub)
+        val_ds   = to_tensor_dataset(X_val, y_val)
+        test_ds  = to_tensor_dataset(X_test_scaled, y_test_np)
+        
+        # Hyperparameter grid from paper
+        batch_sizes = [8, 16]
+        dropouts = [0.3, 0.7]
+        l2_rate = 0.001   # weight decay
+        lr_initial = 1e-3 # we'll use ReduceLROnPlateau; starting LR chosen sensibly
+        min_lr = 1e-4
+        max_epochs = 3000
+        patience_es = 100     # early stopping patience (this is long; paper used early stopping)
+        patience_lr = 20      # patience for ReduceLROnPlateau
+        verbose = True
 
-    best_overall = None
-    best_global_auc = -np.inf
+        best_overall = None
+        best_global_auc = -np.inf
 
-    for batch_size in batch_sizes:
-        for dropout_prob in dropouts:
-            print(f"\n--- Training FFN: batch={batch_size}, dropout={dropout_prob} ---")
-            model = FFN(input_dim=X_train_sub.shape[1], dropout_prob=dropout_prob).to(device)
-            criterion = nn.BCEWithLogitsLoss()
-            optimizer = torch.optim.Adam(model.parameters(), lr=lr_initial, weight_decay=l2_rate)
-            train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
-            val_loader   = DataLoader(val_ds,   batch_size=batch_size*2, shuffle=False)
-            test_loader  = DataLoader(test_ds,  batch_size=batch_size*2, shuffle=False)
-            # ---------- FIXED: AUC-based tracking ----------
-            best_auc_local = -np.inf
-            best_epoch_local = 0
-            best_state_local = None
-            epochs_no_improve = 0
-            for epoch in range(1, max_epochs + 1):
-                train_loss = train_one_epoch(model, train_loader, optimizer, criterion)
-                ys_val, yps_val, val_loss = evaluate(model, val_loader, criterion)
-                try:
-                    val_auc = roc_auc_score(ys_val, yps_val)
-                except:
-                    val_auc = 0.5
-                # ---------- FIX: EARLY STOPPING & BEST MODEL BOTH ON AUC ----------
-                if val_auc > best_auc_local + 1e-12:
-                    best_auc_local = val_auc
-                    best_epoch_local = epoch
-                    best_state_local = deepcopy(model.state_dict())
-                    epochs_no_improve = 0
-                else:
-                    epochs_no_improve += 1
-                if epochs_no_improve >= patience_es:
-                    print(f"Early stopping at epoch {epoch}. Best epoch was {best_epoch_local}.")
-                    break
-            # Load best model state for this config
-            model.load_state_dict(best_state_local)
-            # -------------------- Test evaluation --------------------
-            ys_test, yps_test, _ = evaluate(model, test_loader, criterion)
-            y_pred_test = (yps_test >= 0.5).astype(int)
-            test_auc = roc_auc_score(ys_test, yps_test)
-            test_acc = accuracy_score(ys_test, y_pred_test)
-            cm = confusion_matrix(ys_test, y_pred_test)
-            print(f"TEST -> Accuracy: {test_acc:.4f}, AUC: {test_auc:.4f}")
-            print("Confusion matrix:\n", cm)
-            # sensitivity, specificity, Youden
-            tn, fp, fn, tp = cm.ravel()
-            sensitivity = tp / (tp + fn + 1e-12)
-            specificity = tn / (tn + fp + 1e-12)
-            youden = sensitivity + specificity - 1
-            # ---------- FIX: GLOBAL MODEL SELECTOR uses AUC ----------
-            if best_auc_local > best_global_auc:
-                best_global_auc = best_auc_local
-                best_overall = {
-                    "model_state": deepcopy(best_state_local),
-                    "batch": batch_size,
-                    "dropout": dropout_prob,
-                    "best_epoch": best_epoch_local,
-                    "test_accuracy": test_acc,
-                    "test_auc": test_auc,
-                    "sensitivity": sensitivity,
-                    "specificity": specificity,
-                    "youden_index": youden
-                }
-    
-    FFN_HAR_KS_scores['Accuracy']+=round(best_overall['test_accuracy'],4)
-    FFN_HAR_KS_scores['AUC']+=round(best_overall['test_auc'],4)
-    FFN_HAR_KS_scores['Sensitivity']+=round(best_overall['sensitivity'],4)
-    FFN_HAR_KS_scores['Specificity']+=round(best_overall['specificity'],4)
-    FFN_HAR_KS_scores['Youden_Index']+=round(best_overall['youden_index'],4)
+        for batch_size in batch_sizes:
+            for dropout_prob in dropouts:
+                print(f"\n--- Training FFN: batch={batch_size}, dropout={dropout_prob} ---")
+                model = FFN(input_dim=X_train_sub.shape[1], dropout_prob=dropout_prob).to(device)
+                criterion = nn.BCEWithLogitsLoss()
+                optimizer = torch.optim.Adam(model.parameters(), lr=lr_initial, weight_decay=l2_rate)
+                train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
+                val_loader   = DataLoader(val_ds,   batch_size=batch_size*2, shuffle=False)
+                test_loader  = DataLoader(test_ds,  batch_size=batch_size*2, shuffle=False)
+                # ---------- FIXED: AUC-based tracking ----------
+                best_auc_local = -np.inf
+                best_epoch_local = 0
+                best_state_local = None
+                epochs_no_improve = 0
+                for epoch in range(1, max_epochs + 1):
+                    train_loss = train_one_epoch(model, train_loader, optimizer, criterion)
+                    ys_val, yps_val, val_loss = evaluate(model, val_loader, criterion)
+                    try:
+                        val_auc = roc_auc_score(ys_val, yps_val)
+                    except:
+                        val_auc = 0.5
+                    # ---------- FIX: EARLY STOPPING & BEST MODEL BOTH ON AUC ----------
+                    if val_auc > best_auc_local + 1e-12:
+                        best_auc_local = val_auc
+                        best_epoch_local = epoch
+                        best_state_local = deepcopy(model.state_dict())
+                        epochs_no_improve = 0
+                    else:
+                        epochs_no_improve += 1
+                    if epochs_no_improve >= patience_es:
+                        print(f"Early stopping at epoch {epoch}. Best epoch was {best_epoch_local}.")
+                        break
+                # Load best model state for this config
+                model.load_state_dict(best_state_local)
+                # -------------------- Test evaluation --------------------
+                ys_test, yps_test, _ = evaluate(model, test_loader, criterion)
+                y_pred_test = (yps_test >= 0.5).astype(int)
+                test_auc = roc_auc_score(ys_test, yps_test)
+                test_acc = accuracy_score(ys_test, y_pred_test)
+                cm = confusion_matrix(ys_test, y_pred_test)
+                print(f"TEST -> Accuracy: {test_acc:.4f}, AUC: {test_auc:.4f}")
+                print("Confusion matrix:\n", cm)
+                # sensitivity, specificity, Youden
+                tn, fp, fn, tp = cm.ravel()
+                sensitivity = tp / (tp + fn + 1e-12)
+                specificity = tn / (tn + fp + 1e-12)
+                youden = sensitivity + specificity - 1
+                # ---------- FIX: GLOBAL MODEL SELECTOR uses AUC ----------
+                if best_auc_local > best_global_auc:
+                    best_global_auc = best_auc_local
+                    best_overall = {
+                        "model_state": deepcopy(best_state_local),
+                        "batch": batch_size,
+                        "dropout": dropout_prob,
+                        "best_epoch": best_epoch_local,
+                        "test_accuracy": test_acc,
+                        "test_auc": test_auc,
+                        "sensitivity": sensitivity,
+                        "specificity": specificity,
+                        "youden_index": youden
+                    }
+        
+        FFN_HAR_KS_scores['Accuracy']+=round(best_overall['test_accuracy'],4)
+        FFN_HAR_KS_scores['AUC']+=round(best_overall['test_auc'],4)
+        FFN_HAR_KS_scores['Sensitivity']+=round(best_overall['sensitivity'],4)
+        FFN_HAR_KS_scores['Specificity']+=round(best_overall['specificity'],4)
+        FFN_HAR_KS_scores['Youden_Index']+=round(best_overall['youden_index'],4)
+    except Exception as e:
+        print("Error in FFN-HAR-KS model for ticker", ticker, ":", e)
 
     """# **GCNN-HAR-KS**"""
-    label_col = "RV_dir"   # target (0/1)
-    components = [
-        'RV','BPV','Jump_ABD','CSP_ABD',
-        'Jump_BNS','CSP_BNS','Jump_JO','CSP_JO',
-        'RS_plus','RS_minus','L_daily','RV_neg_indicator',
-        'SJ','SJ_plus','SJ_minus','TQ'
-    ]
-    intervals = [1] + list(range(6, 21))  # [1,6,7,...,20] -> length 16
-    # Training / grid search settings (Appendix C)
-    BATCH_SIZES = [8, 16]
-    DROPOUTS = [0.3, 0.7]
-    L2_RATE = 0.001
-    LR_INITIAL = 1e-3
-    MIN_LR = 1e-4
-    PATIENCE_LR = 20
-    MAX_EPOCHS = 3000
-    PATIENCE_ES = 50   # early-stopping patience (tune down to 50 for quick debug)
-    NUM_CONV_LAYERS_CHOICES = [1, 2]  # paper had [1,2]
-    TEST_SIZE = 0.2
-    VAL_SIZE = 0.2
-    STANDARDIZE_BEFORE_ROLL = True
-    CLASS_WEIGHTING = True  # set True to use class weights in CrossEntropyLoss if imbalance exists
-    SEED = 42
-    NUM_WORKERS = 4
-    SAVE_PATH = "cnn_har_ks_best.pt"
-    set_seed(SEED)
-    images, labels, retained_dates = prepare_images_and_labels(main_df, components, intervals, label_col, standardize=STANDARDIZE_BEFORE_ROLL)
-    # optional quick sanity overfit test (small)
-    # (user may skip, but recommended)
-    # train full model grid
-    best = train_cnn_har_ks(images, labels, components, intervals,
-                            conv_layers_choices=NUM_CONV_LAYERS_CHOICES,
-                            batch_sizes=BATCH_SIZES, dropouts=DROPOUTS,
-                            lr_initial=LR_INITIAL, min_lr=MIN_LR, l2_rate=L2_RATE,
-                            patience_lr=PATIENCE_LR, patience_es=PATIENCE_ES,
-                            max_epochs=MAX_EPOCHS, test_size=TEST_SIZE, val_size=VAL_SIZE,
-                            class_weighting=CLASS_WEIGHTING, save_path=SAVE_PATH, num_workers=NUM_WORKERS)
-    print("Best result:", best['test_accuracy'])
-    GCNN_HAR_KS_scores['Accuracy']+=round(best['test_accuracy'],4)
-    GCNN_HAR_KS_scores['AUC']+=round(best['test_auc'],4)
-    GCNN_HAR_KS_scores['Sensitivity']+=round(best['sensitivity'],4)
-    GCNN_HAR_KS_scores['Specificity']+=round(best['specificity'],4)
-    GCNN_HAR_KS_scores['Youden_Index']+=round(best['youden_index'],4)
+    try:
+        label_col = "RV_dir"   # target (0/1)
+        components = [
+            'RV','BPV','Jump_ABD','CSP_ABD',
+            'Jump_BNS','CSP_BNS','Jump_JO','CSP_JO',
+            'RS_plus','RS_minus','L_daily','RV_neg_indicator',
+            'SJ','SJ_plus','SJ_minus','TQ'
+        ]
+        intervals = [1] + list(range(6, 21))  # [1,6,7,...,20] -> length 16
+        # Training / grid search settings (Appendix C)
+        BATCH_SIZES = [8, 16]
+        DROPOUTS = [0.3, 0.7]
+        L2_RATE = 0.001
+        LR_INITIAL = 1e-3
+        MIN_LR = 1e-4
+        PATIENCE_LR = 20
+        MAX_EPOCHS = 3000
+        PATIENCE_ES = 50   # early-stopping patience (tune down to 50 for quick debug)
+        NUM_CONV_LAYERS_CHOICES = [1, 2]  # paper had [1,2]
+        TEST_SIZE = 0.2
+        VAL_SIZE = 0.2
+        STANDARDIZE_BEFORE_ROLL = True
+        CLASS_WEIGHTING = True  # set True to use class weights in CrossEntropyLoss if imbalance exists
+        SEED = 42
+        NUM_WORKERS = 4
+        SAVE_PATH = "cnn_har_ks_best.pt"
+        set_seed(SEED)
+        images, labels, retained_dates = prepare_images_and_labels(main_df, components, intervals, label_col, standardize=STANDARDIZE_BEFORE_ROLL)
+        # optional quick sanity overfit test (small)
+        # (user may skip, but recommended)
+        # train full model grid
+        best = train_cnn_har_ks(images, labels, components, intervals,
+                                conv_layers_choices=NUM_CONV_LAYERS_CHOICES,
+                                batch_sizes=BATCH_SIZES, dropouts=DROPOUTS,
+                                lr_initial=LR_INITIAL, min_lr=MIN_LR, l2_rate=L2_RATE,
+                                patience_lr=PATIENCE_LR, patience_es=PATIENCE_ES,
+                                max_epochs=MAX_EPOCHS, test_size=TEST_SIZE, val_size=VAL_SIZE,
+                                class_weighting=CLASS_WEIGHTING, save_path=SAVE_PATH, num_workers=NUM_WORKERS)
+        print("Best result:", best['test_accuracy'])
+        GCNN_HAR_KS_scores['Accuracy']+=round(best['test_accuracy'],4)
+        GCNN_HAR_KS_scores['AUC']+=round(best['test_auc'],4)
+        GCNN_HAR_KS_scores['Sensitivity']+=round(best['sensitivity'],4)
+        GCNN_HAR_KS_scores['Specificity']+=round(best['specificity'],4)
+        GCNN_HAR_KS_scores['Youden_Index']+=round(best['youden_index'],4)
+    except Exception as e:
+        print("Error in GCNN-HAR-KS model for ticker", ticker, ":", e)
 
     print("="*10+"Completed processing for ticker:", ticker +"="*10)
 
